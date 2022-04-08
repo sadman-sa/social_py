@@ -1,0 +1,33 @@
+﻿
+{% extends "base.html" %}
+
+{% block mainsection %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+
+    <div>
+        <h1>this is message section between you and <b style="color:crimson">{{receivere}}</b></h1>
+    </div>
+
+    {% for msg in msg %}
+    {% if request.user == msg.message_ricevere and msg.message_sender == receivere %}
+    <strong>{{msg.message_sender}}</strong>
+    {{msg.sent_message}}
+    <br />
+    {% elif request.user == msg.message_sender and msg.message_ricevere == receivere %}
+    <strong>{{msg.message_sender}}</strong>
+    {{msg.sent_message}}
+    <br />
+    {% endif %}
+    {% endfor %}
+
+    <form action="/message/{{receivere.pk}}/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="message" />
+        <button type="submit">send</button>
+    </form>
+
+</body>
+</html>
+{% endblock mainsection %}

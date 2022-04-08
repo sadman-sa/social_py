@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block mainsection %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<style>
+    .u_container{
+        padding-left:5%
+    }
+</style>
+<body>
+    {% for u in list_u %}
+    <div class="u_container">
+        <a href="/profile/{{u.pk}}/"><h1>{{u.first_name}} {{u.last_name}}</h1></a>
+        <p>{{u.email}}</p>
+        <p>{{u.username}}</p>
+        {% if u.pk != request.user.pk %}
+        <a href="/message/{{u.pk}}/"><button>send message</button></a>
+        {% endif %}
+        <hr />
+        <br />
+    </div>
+    {% endfor %}
+</body>
+</html>
+{% endblock mainsection %}

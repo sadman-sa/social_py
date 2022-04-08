@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+
+{% extends "base.html" %}
+
+{% block mainsection %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<h1>What's in your mind?'</h1>
+<form action="/home/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="thought" required/>
+    <button type="submit">post</button>
+</form>
+<br/>
+<hr/>
+<div>
+    {% for thought in list_thought %}
+    <div>
+        <a href="/profile/{{thought.user.pk}}/">
+            <b>{{thought.user.first_name}}</b>
+        </a>
+        <h3>{{thought.thoughts}}</h3>
+        <form method="POST" action="/like/">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{thought.id}}" />
+            {% if request.user not in thought.liked.all  %}
+            <button type="submit">like</button>
+            {% else %}
+            <button type="submit">ulike</button>
+            {% endif %}
+            {{thought.liked.all.count}} likes
+        </form>
+        <form action="/comment/" method="POST">
+            {% csrf_token %}
+            <input type="text" name="comment_input" />
+            <input type="hidden" name="post_id" value="{{thought.id}}" />
+            <button type="submit">comment</button>
+            <br />
+            {% if not thought.comments.all %}
+            No Comments yet....
+            {% else %}
+            {% for cmnt in thought.comments.all %}
+            <a href="/profile/{{cmnt.user.pk}}/">
+                <strong>{{cmnt.user}}</strong>
+            </a>
+            {{cmnt.comment}}
+            <br />
+            {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+    <br />
+    <br />
+    <hr />
+    {% endfor %}
+</div>
+</html>
+{% endblock mainsection %}

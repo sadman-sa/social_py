@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>header</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    </header>
+
+    <div>
+        <section class="header">
+        <div class="icon"><i class="fa fa-bars" onclick="show()"></i></div>
+        <nav id="manue">
+        <ul> 
+            <div class="icon"><i class="fa fa-window-close" onclick="hide()"></i></div>
+            <li><a href="/home/" >Home</a></li>
+            <li><a href="/users/" >Users</a></li>
+            <li><a href="/chat/">Messages</a></li>
+            <li><a href="/profile/{{request.user.pk}}/"><h1>{{request.user.first_name}}</h1></a></li>
+            <li><button><a href="/logout/">logout</a></button></li>
+        </ul>
+        </nav>
+        <div class="src">
+        <input placeholder="sceacrch...">
+        <i class="fa fa-search"></i>
+        </div>
+    </section>
+    </div>
+
+    <script>
+       var x =  document.getElementById('manue');
+       function show(){x.style.width="130px"};
+       function hide(){x.style.width="0"};
+    </script>
+
+    {% block mainsection %}
+    {% endblock mainsection %}
+
+</html>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'Open Sans', sans-serif;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        height: cover;
+        position: relative;
+        background-color: #ffcccc;
+        width: 100%;
+    }
+
+        .header nav ul li {
+            list-style: none;
+            display: inline-block;
+            padding: 8px 12px;
+            font-size: 20px;
+            color: black;
+            transition: .5s;
+        }
+
+            .header nav ul li:hover {
+                border: solid 1px white;
+                background-color: tomato;
+                color: white;
+            }
+
+    .icon {
+        display: none;
+    }
+
+    .src input {
+        height: 40px;
+        border-radius: 10px;
+        border: solid 1px rgb(252, 176, 176);
+        margin-top: 2px;
+        padding: 5px;
+    }
+
+        .src input:hover {
+            box-shadow: 0 0 20px 0px rgba(9, 255, 103, 0.2);
+        }
+
+    .src {
+        display: flex;
+        color: black;
+        background-color: rgb(231, 213, 213);
+    }
+
+        .src i {
+            padding: 20px;
+        }
+
+    @media(max-width: 670px) {
+        .header nav {
+            position: absolute;
+            background-color: #ff3300;
+            height: 70vh;
+            width: 0px;
+            overflow: scroll;
+            transition: 1s;
+        }
+
+        .icon {
+            display: block;
+            font-size: 25px;
+            margin-top: 10px;
+            margin-left: 5px;
+            cursor: pointer;
+            color: white;
+        }
+    }
+
+    @media(min-width: 671px) {
+        .header ul {
+            display: flex;
+        }
+    }
+</style>

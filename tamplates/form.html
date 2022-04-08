@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    
+
+</head>
+<body>
+    {% if messages %}
+    {% for message in messages %}
+    <h1>{{message}}</h1>
+    {% endfor %}
+    {% endif %}
+
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit" />
+    </form>
+   <h2><a href="/form/">Click here to logIn</a></h2>
+</body>
+</html>

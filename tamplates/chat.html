@@ -1,0 +1,16 @@
+﻿{% extends "base.html" %}
+
+{% block mainsection %}
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<body>
+    {% for m in msg %}
+    <br />
+    <a href="/message/{{m.pk}}/"><strong style="color:black">{{m}}</strong> replied to your message<strong style="color:red">...</strong></a>
+    <br />
+    <hr />
+    {% endfor %}
+</body>
+</html>
+{% endblock mainsection %}
